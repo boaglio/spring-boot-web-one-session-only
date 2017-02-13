@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Spring Security One Session Only</title>
+    </head>
+    <body>
+        <h1 th:inline="text">Logged users</h1>
+
+		<table class="table table-bordered table-striped">
+			<thead> 
+				<tr>
+					<td>login</td>
+					<td>UUID</td>
+					<td>Start</td>
+					<td>Last Update</td>
+					<td>remove session</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user: ${loginList}">
+					<td th:text="${user.login}">1</td>
+					<td th:text="${user.uuid}">uuid</td>
+					<td th:text="${#dates.format(user.dtStart,'dd-MM-yyyy')}">initial date</td>
+					<td th:text="${#dates.format(user.dtLastUpdate,'dd-MM-yyyy')}">last update</td>
+					<td><a href="#" th:href="@{'/cache/remove/' + ${user.login}}"> remove </a></td>
+				</tr>
+			</tbody>
+		</table>
+		
+    </body>
+</html>
